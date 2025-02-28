@@ -14,5 +14,9 @@
         <input id="password" name="password" type="password" />
         <button>Sign In</button>
     </form>
+    <% if (messages.error) { %>
+        <p style="color: red;"><%= messages.error %></p>
+    <% } %>
+    
 </body>
 </html>

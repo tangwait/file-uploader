@@ -1,5 +1,8 @@
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const prismaFunction = require('../models/userModel'); 
 const bcrypt = require('bcryptjs');
+const prisma = require('../prismaClient');
 
 function loadHomepage(req, res) {
     res.render("index");
@@ -35,11 +38,28 @@ async function registerUser(req, res) {
     }
 }
 
+function loginUser(req, res, next) {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) return next(err);
+        if (!user) {
+            req.flash('error', info.message);
+            return res.redirect('/login');
+        }
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            return res.redirect('/');
+        });
+    }) (req, res, next);
+}
+
+
 
 module.exports = {
     loadHomepage,
     loadLogin,
     loadRegister,
     logOut,
-    registerUser
+    registerUser,
+    loginUser
 }
