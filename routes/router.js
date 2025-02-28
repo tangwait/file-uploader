@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const userController = require("../controllers/userController");
-const passport = require("../passportConfig");
+const middlewares = require('../middlewares');
 
 router.get("/", userController.loadHomepage);
 
@@ -10,6 +10,8 @@ router.post("/register", userController.registerUser);
 
 router.get("/login", userController.loadLogin);
 router.post("/login", userController.loginUser);
+
+router.get('/dashboard', middlewares.isAuthenticated, userController.loadDashboard);
 
 router.post('/logout', userController.logOut);
 

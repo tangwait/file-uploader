@@ -1,6 +1,7 @@
 const passport = require('passport');
 const prismaFunction = require('../models/userModel'); 
 const bcrypt = require('bcryptjs');
+require("../passportConfig");
 
 function loadHomepage(req, res) {
     res.render("index");
@@ -46,9 +47,17 @@ function loginUser(req, res, next) {
 
         req.logIn(user, (err) => {
             if (err) return next(err);
-            return res.redirect('/');
+            return res.redirect('/dashboard');
         });
     }) (req, res, next);
+}
+
+function loadDashboard(req, res) {
+    if (!req.user) {
+        console.log("can't find user (dashboard)")
+        return res.redirect('/login');
+    }
+    res.render('dashboard', { user: req.user });
 }
 
 
@@ -59,5 +68,6 @@ module.exports = {
     loadRegister,
     logOut,
     registerUser,
-    loginUser
+    loginUser,
+    loadDashboard
 }
