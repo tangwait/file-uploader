@@ -1,8 +1,6 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const prismaFunction = require('../models/userModel'); 
 const bcrypt = require('bcryptjs');
-const prisma = require('../prismaClient');
 
 function loadHomepage(req, res) {
     res.render("index");
