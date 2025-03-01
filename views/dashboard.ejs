@@ -18,8 +18,12 @@
         <% files.forEach(file => { %>
             <li class="file-item">
                 <%= file.name %>
-                <a href="#" class="info-icon">ℹ️</a>   
-                
+                <a href="#" class="info-icon">ℹ️</a>
+                <form action="/deleteFile/<%= file.id %>" method="POST">
+                    <input type="hidden" name="fileId" value="<%= file.id %>">
+                    <button type="submit">Delete</button>
+                </form>    
+
                 <div class="file-details">
                     <p><strong>Size:</strong> <%= file.size %> bytes</p>
                     <p><strong>Uploaded on:</strong> <%= new Date(file.upload_date).toLocaleString() %></p>

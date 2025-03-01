@@ -4,11 +4,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     infoIcons.forEach(icon => {
         icon.addEventListener('click', function() {
-            const fileInfo = this.nextElementSibling;
+            const fileItem = this.closest('.file-item');
+            const fileInfo = fileItem.querySelector('.file-details');
+
             if (fileInfo.style.display === "none" || fileInfo.style.display === "") {
-                fileInfo.style.display = "block";
+                fileInfo.style.display = "block"; 
             } else {
-                fileInfo.style.display = "none";
+                fileInfo.style.display = "none"; 
             }
         });
     });

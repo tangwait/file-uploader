@@ -14,7 +14,9 @@ router.get("/login", userController.loadLogin);
 router.post("/login", userController.loginUser);
 
 router.get('/dashboard', middlewares.isAuthenticated, userController.loadDashboard);
+
 router.post('/uploadFile', upload.single("file"), filesController.uploadFile)
+router.post('/deleteFile/:fileId', filesController.deleteFile);
 
 router.post('/logout', userController.logOut);
 

@@ -27,7 +27,32 @@ async function uploadFile(req, res) {
         }  
 }
 
+async function deleteFile(req, res) {
+    const fileId = req.params.fileId;
+
+    try {
+        const file = await prisma.file.findUnique({
+            where: { id: fileId } 
+        });
+
+        if (!file) {
+            return res.status(404).send("File not found");
+        }
+
+        const deletedFile = await prisma.file.delete({
+            where: { id: fileId }  
+        });
+
+        console.log("Deleted file:", deletedFile);
+        res.redirect('/dashboard'); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Can't delete file");
+    }
+}
+
 
 module.exports = {
-    uploadFile
+    uploadFile,
+    deleteFile
 }
