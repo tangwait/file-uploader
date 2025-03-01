@@ -8,7 +8,6 @@ const path = require("node:path");
 const prisma = require('./prismaClient');
 const flash = require('connect-flash');
 
-
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));

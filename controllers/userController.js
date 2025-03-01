@@ -52,12 +52,20 @@ function loginUser(req, res, next) {
     }) (req, res, next);
 }
 
-function loadDashboard(req, res) {
+async function loadDashboard(req, res) {
     if (!req.user) {
         console.log("can't find user (dashboard)")
         return res.redirect('/login');
     }
-    res.render('dashboard', { user: req.user });
+
+    try {
+        const userId = req.user.userId
+        const files = await prismaFunction.getUserFiles(userId)
+        res.render('dashboard', { user: req.user, files });
+    } catch (error) {
+        console.error("Error loading dashboard:", error);
+        res.status(500).send("Server error");
+    }
 }
 
 

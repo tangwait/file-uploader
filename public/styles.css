@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.file-item {
+    position: relative;
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.info-icon {
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.file-details {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.file-item:target .file-details {
+    display: block;
+}
+
+.close-details {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: red;
+    text-decoration: none;
+}
+
+.close-details:hover {
+    text-decoration: underline;
+}

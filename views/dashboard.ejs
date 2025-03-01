@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tangwait Files Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Welcome <%= user.first_name %></h1>
-        
+    <h2>Upload a file:</h2>
+    <form action="/uploadFile" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <h2>Files:</h2>
+    <ul>
+        <% files.forEach(file => { %>
+            <li class="file-item">
+                <%= file.name %>
+                <a href="#" class="info-icon">ℹ️</a>   
+                
+                <div class="file-details">
+                    <p><strong>Size:</strong> <%= file.size %> bytes</p>
+                    <p><strong>Uploaded on:</strong> <%= new Date(file.upload_date).toLocaleString() %></p>
+                    <p><strong>Type:</strong> <%= file.mimetype %></p>
+                    <a href="#" class="close-details">Close</a>
+                </div>         
+            </li>
+        <% }) %>
+    </ul>
+    <script src="/dashboard.js"></script>
 </body>
 </html>

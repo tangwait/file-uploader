@@ -14,13 +14,16 @@ async function findUserEmail(email) {
 
 async function getUserInfo(id) {
     return await prisma.user.findUnique({
-        where: {
-            id, 
-        }
+        where: { id }
     });
 }
 
-
+async function getUserFiles(userId) {
+    return await prisma.file.findMany({
+        where: { userId },
+        orderBy: { upload_date: 'desc' }
+    });
+}
 
 
 
@@ -28,5 +31,6 @@ async function getUserInfo(id) {
 module.exports = {
     createUser,
     findUserEmail,
-    getUserInfo
+    getUserInfo,
+    getUserFiles
 }
